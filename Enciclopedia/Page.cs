@@ -9,7 +9,7 @@ namespace Enciclopedia
     internal class Page
     {
         private string _name;
-        private int _accessCount= 0;
+        private int _accessCount = 0;
 
         public int AccessCount => _accessCount;
 

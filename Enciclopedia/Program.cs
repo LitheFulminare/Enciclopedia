@@ -11,6 +11,20 @@ foreach (string? wiki in wikiList)
     Console.WriteLine(wiki);
 }
 
+// LOGICA 
+// primeiro cria a Home
+// procura por '.'
+// se tem 1 ponto a mais do que o anterior, adiciona como filho
+// se tem igual, adiciona como irmão (filho do último pai encontrado)
+
+// ou
+
+// vai realizando a lógica por número de pontos
+// 1 ponto -> filho do home
+// 2 pontos -> filho do ultimo filho do home
+// 3 pontos -> filho do ultimo filho do filho
+
+
 //TreeNode<string> a = new TreeNode<string>("A");
 
 //a.AddChild("B");
