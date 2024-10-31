@@ -1,0 +1,47 @@
+Home
+.Monsters
+..Dune Dome
+...Dune Slime
+...Barb Wasp
+...Mummy
+..Glacial Library
+...Glacial Slime
+...Frost Moth
+...Animated Executioner
+..Lost Wreckage
+...Ocean Slime
+...Fungal Crab
+...Treasure Hunter
+..Magma City
+...Volcanic Slime
+...Lava PillBug
+...Tossing Ogre
+..Misty Grove Ruins
+...Common Slime
+...Bomb Beetle
+...Ancients' Shaman
+..Tower of Doom
+...Sky Slime
+...Spiderling
+...Tower Gargoyle
+.Cards
+..Oracle
+...Polymorph
+...Frog the Weak
+...Summon Beetle
+..Raider
+...Spark
+...Flame Ring
+...Fury Swipes
+..Stranger
+...Cruel Attack
+...Entropic Step
+...Blind Knife
+..Traveler
+...Jettison
+...Hand Sleigh
+...Shadow Walk
+..Warden
+...Barricade
+...Second Wind
+...Turtle Push
