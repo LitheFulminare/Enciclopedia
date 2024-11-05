@@ -2,14 +2,16 @@
 
 string wikiPath = "data/wiki.txt";
 
-TreeNode<string> homeNode = new TreeNode<string>("Home");
+//TreeNode<string> homeNode = new TreeNode<string>("Home");
 
 List<string?> wikiList = FileReader.CreateList(wikiPath);
 
-foreach (string? wiki in wikiList)
-{
-    Console.WriteLine(wiki);
-}
+HierarchyManager.CreateHierarchyFromList(wikiList);
+
+//foreach (string? wiki in wikiList)
+//{
+//    Console.WriteLine(wiki);
+//}
 
 // LOGICA 
 // primeiro cria a Home
