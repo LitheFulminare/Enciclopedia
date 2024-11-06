@@ -24,11 +24,12 @@ namespace Enciclopedia
 
                 int dotCount = CountCharacters(page, '.');
 
-                if (dotCount == 1) category = homeNode.AddChild(page); 
-                if (dotCount == 2) subcategory = category.AddChild(page);
-                if (dotCount == 3) subcategory.AddChild(page);
-
-                // logica aqui
+                switch (dotCount)
+                {
+                    case 1: category = homeNode.AddChild(page); break;
+                    case 2: subcategory = category.AddChild(page); break;
+                    case 3: subcategory.AddChild(page); break;
+                }
             }
 
             return homeNode;
