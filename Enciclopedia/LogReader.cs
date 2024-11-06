@@ -18,9 +18,14 @@ namespace Enciclopedia
         {
             if (accessLog == null) return;
 
+            // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
             {
+                // loop para cada caractere de um log em particular
+                for (int j = 0; j < accessLog[i].Length; j++)
+                {
 
+                }
             }
         }
     }
