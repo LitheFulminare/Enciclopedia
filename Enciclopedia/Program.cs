@@ -1,19 +1,4 @@
-﻿using Enciclopedia;
-
-string wikiPath = "data/wiki.txt";
-
-//TreeNode<string> homeNode = new TreeNode<string>("Home");
-
-List<string?> wikiList = FileReader.CreateList(wikiPath);
-
-HierarchyManager.CreateHierarchyFromList(wikiList);
-
-//foreach (string? wiki in wikiList)
-//{
-//    Console.WriteLine(wiki);
-//}
-
-// LOGICA 
+﻿// LOGICA 
 // primeiro cria a Home
 // procura por '.'
 // se tem 1 ponto a mais do que o anterior, adiciona como filho
@@ -26,6 +11,22 @@ HierarchyManager.CreateHierarchyFromList(wikiList);
 // 2 pontos -> filho do ultimo filho do home
 // 3 pontos -> filho do ultimo filho do filho
 
+using Enciclopedia;
+
+string wikiPath = "data/wiki.txt";
+
+//TreeNode<string> homeNode = new TreeNode<string>("Home");
+
+List<string?> wikiList = FileReader.CreateList(wikiPath);
+
+TreeNode<string> homeNode = HierarchyManager.CreateHierarchyFromList(wikiList);
+
+homeNode.ProcessPreOrder(PrintNode);
+
+//foreach (string? wiki in wikiList)
+//{
+//    Console.WriteLine(wiki);
+//}
 
 //TreeNode<string> a = new TreeNode<string>("A");
 

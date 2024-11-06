@@ -9,18 +9,16 @@ namespace Enciclopedia
 {
     internal class HierarchyManager
     {
-        public static void CreateHierarchyFromList(List<string?> list)
+        public static TreeNode<string> CreateHierarchyFromList(List<string?> list)
         {
+            TreeNode<string> homeNode = new TreeNode<string>("Home");
+
             foreach (string? item in list)
             {
-                if (item == null) break;
-
-                if (!item.Contains('.'))
-                {
-                    TreeNode<string> homeNode = new TreeNode<string>("Home");
-                    Console.WriteLine("Found no dot");
-                }
+                if (item == null || !item.Contains('.')) break;
             }
+
+            return homeNode;
         }
     }
 }
