@@ -8,9 +8,9 @@ namespace Enciclopedia
 {
     internal class FileReader
     {
-        public static List<string?> CreateList(string filepath)
+        public static List<string> CreateList(string filepath)
         {
-            List<string?> list = new List<string?>();
+            List<string> list = new List<string>();
 
             string[] lines = File.ReadAllLines(filepath);
             list.AddRange(lines);

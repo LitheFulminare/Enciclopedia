@@ -9,12 +9,12 @@ namespace Enciclopedia
 {
     internal class HierarchyManager
     {
-        public static TreeNode<string> CreateHierarchyFromList(List<string?> pageList)
+        public static TreeNode<string> CreateHierarchyFromList(List<string> pageList)
         {
             TreeNode<string> homeNode = new TreeNode<string>("Home");
 
             // usado no foreach pra adicionar categorias e subcategorias
-
+            // são removidos no final
             TreeNode<string> category = homeNode.AddChild("category");
             TreeNode<string> subcategory = category.AddChild("subcategory");
 

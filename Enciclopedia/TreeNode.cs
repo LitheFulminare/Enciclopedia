@@ -9,11 +9,13 @@ namespace Enciclopedia
     internal class TreeNode<Type>
     {
         public Type value;
+        private int _access = 0;
 
         private TreeNode<Type>? _parent;
         private List<TreeNode<Type>> _children = new List<TreeNode<Type>>();
 
         public TreeNode<Type>? Parent => _parent;
+        public int Access => _access;
 
         public TreeNode(Type value, TreeNode<Type>? parent = null)
         {
@@ -81,6 +83,11 @@ namespace Enciclopedia
                 }
                 function(node);
             }
+        }
+
+        public void AddAccess()
+        {
+            _access++;
         }
     }
 }
