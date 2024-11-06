@@ -15,8 +15,6 @@ using Enciclopedia;
 
 string wikiPath = "data/wiki.txt";
 
-//TreeNode<string> homeNode = new TreeNode<string>("Home");
-
 List<string?> wikiList = FileReader.CreateList(wikiPath);
 
 TreeNode<string> homeNode = HierarchyManager.CreateHierarchyFromList(wikiList);
