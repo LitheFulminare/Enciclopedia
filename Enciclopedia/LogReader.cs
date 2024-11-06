@@ -14,7 +14,7 @@ namespace Enciclopedia
         public string? MostAccessedMonster => _mostAccessedMonster;
         public string? MostAccessedCard => _mostAccessedCard;
 
-        public static void ComputeData(List<string?> accessLog)
+        public static void ComputeData(List<string?> accessLog, TreeNode<string> pageTree)
         {
             if (accessLog == null) return;
 

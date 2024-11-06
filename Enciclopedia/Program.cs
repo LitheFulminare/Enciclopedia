@@ -8,7 +8,7 @@ List<string?> logList = FileReader.CreateList(logPath);
 
 TreeNode<string> homeNode = HierarchyManager.CreateHierarchyFromList(wikiList);
 
-LogManager.ComputeData(logList);
+LogManager.ComputeData(logList, homeNode);
 
 homeNode.ProcessPreOrder(PrintNode);
 
