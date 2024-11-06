@@ -34,6 +34,8 @@ namespace Enciclopedia
                 }
             }
 
+            homeNode.RemoveChildByIndex(0);
+
             return homeNode;
         }
 
