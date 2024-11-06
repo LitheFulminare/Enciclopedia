@@ -23,8 +23,6 @@ namespace Enciclopedia
 
         public static void ComputeData(List<string> accessLog, TreeNode<string> pageTree)
         {
-            //if (accessLog == null) return;
-
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
             {
@@ -42,8 +40,9 @@ namespace Enciclopedia
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
                     {
-                        Console.WriteLine($"-> Usuário voltou para a pagina {previousCategory.value}");
+                        previousCategory = currentPage.Parent;
                         currentPage = previousCategory;
+                        Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.value}");
                         continue;
                     }
 
@@ -66,7 +65,7 @@ namespace Enciclopedia
                         }
                         else
                         {
-                            previousCategory = childPage;
+                            previousCategory = currentPage;
                         }          
                     }
 
