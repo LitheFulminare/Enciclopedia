@@ -32,7 +32,7 @@ namespace Enciclopedia
 
                 // o log sempre começa na home
                 TreeNode<string> previousCategory = pageTree;
-                TreeNode<string> currentCategory = pageTree;
+                TreeNode<string> currentPage = pageTree;
 
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
@@ -42,23 +42,38 @@ namespace Enciclopedia
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
                     {
-                        Console.WriteLine("Usuário voltou para a anterior");
-                        currentCategory = previousCategory;
+                        Console.WriteLine($"-> Usuário voltou para a pagina {previousCategory.value}");
+                        currentPage = previousCategory;
                         continue;
                     }
 
-                    TreeNode<string> childPage = currentCategory.GetChild(accessLog[i][j]);
-                    //Console.WriteLine($"Pagina é nula");
-                    if (childPage != null)
+                    int childIndex = Convert.ToInt32(new string(accessLog[i][j], 1));
+
+                    // childPage é a pagina que vai ser acessada
+                    TreeNode<string> childPage = currentPage.GetChild(childIndex);
+
+                    if (childPage == null)
                     {
-                        Console.WriteLine($"Usuario accesou a pag {childPage}");
-
-                        currentCategory = childPage;
-                        currentCategory.AddAccess();
+                        Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
                         continue;
                     }
+                    
+                    if (childPage.GetChild(0) != null)
+                    {
+                        if (childPage.Parent == pageTree)
+                        {
+                            previousCategory = pageTree;
+                        }
+                        else
+                        {
+                            previousCategory = childPage;
+                        }          
+                    }
 
-                    Console.WriteLine("Tentativa de acessar uma página invalida");
+                    Console.WriteLine($"-> Usuario accesou a pag {childPage.value}");
+
+                    currentPage = childPage;
+                    currentPage.AddAccess();
                 }
             }
         }
