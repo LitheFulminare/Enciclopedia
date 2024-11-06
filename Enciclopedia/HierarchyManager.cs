@@ -15,15 +15,17 @@ namespace Enciclopedia
 
             // usado no foreach pra adicionar categorias e subcategorias
 
-            TreeNode<string> category = homeNode.AddChild("default");
-            TreeNode<string> subcategory = category.AddChild("default");
+            TreeNode<string> category = homeNode.AddChild("category");
+            TreeNode<string> subcategory = category.AddChild("subcategory");
 
+            // loop pra adicionar as paginas ao node 'Home'
             foreach (string? page in pageList)
             {
                 if (page == null || !page.Contains('.')) continue;
 
                 int dotCount = CountCharacters(page, '.');
 
+                // vê quantos ponto tem para e decide se adiciona a Home, a última categoria criada, ou a última subcategoria criada
                 switch (dotCount)
                 {
                     case 1: category = homeNode.AddChild(page); break;
