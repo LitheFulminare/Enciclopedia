@@ -44,6 +44,7 @@ namespace Enciclopedia
             foreach (char c in value)
             {
                 if (c == character) count++;
+                else break;
             }
 
             return count;
