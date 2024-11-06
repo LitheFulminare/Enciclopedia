@@ -21,7 +21,7 @@ namespace Enciclopedia
         - Se o caracter é 'b', significa que o usuário voltou para a categoria anterior, pai da página em que está.
         */
 
-        public static void ComputeData(List<string> accessLog, TreeNode<string> pageTree)
+        public static void ComputeData(List<string> accessLog, TreeNode<string> homeNode)
         {
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
@@ -29,8 +29,8 @@ namespace Enciclopedia
                 Console.WriteLine($"Checando o log {accessLog[i]}");
 
                 // o log sempre começa na home
-                TreeNode<string> previousCategory = pageTree;
-                TreeNode<string> currentPage = pageTree;
+                TreeNode<string> previousCategory = homeNode;
+                TreeNode<string> currentPage = homeNode;
 
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
@@ -42,6 +42,7 @@ namespace Enciclopedia
                     {
                         previousCategory = currentPage.Parent;
                         currentPage = previousCategory;
+                        currentPage.AddAccess();
                         Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.value}");
                         continue;
                     }
@@ -59,9 +60,9 @@ namespace Enciclopedia
                     
                     if (childPage.GetChild(0) != null)
                     {
-                        if (childPage.Parent == pageTree)
+                        if (childPage.Parent == homeNode)
                         {
-                            previousCategory = pageTree;
+                            previousCategory = homeNode;
                         }
                         else
                         {

@@ -30,10 +30,28 @@ namespace Enciclopedia
                 {
                     case 1: category = homeNode.AddChild(page); break;
                     case 2: subcategory = category.AddChild(page); break;
-                    case 3: subcategory.AddChild(page); break;
+                    case 3: 
+                        TreeNode<string> newPage = subcategory.AddChild(page);
+
+                        // .Parent.Parent acessa a categoria que é pai da subcagoria
+                        if (newPage.Parent.Parent.value == ".Monsters")
+                        {
+                            newPage.pageType = PageType.Monster;
+                        }
+                        else if (newPage.Parent.Parent.value == ".Cards")
+                        {
+                            newPage.pageType = PageType.Card;
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid category");
+                        }
+
+                        break;
                 }
             }
 
+            // remove os nodes temporários 'category' e 'subcategory'
             homeNode.RemoveChildByIndex(0);
 
             return homeNode;

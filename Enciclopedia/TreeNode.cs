@@ -4,11 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+public enum PageType
+{
+    Card = 0,
+    Monster = 1
+}
+
 namespace Enciclopedia
 {
     internal class TreeNode<Type>
     {
         public Type value;
+        public PageType pageType;
+
         private int _access = 0;
 
         private TreeNode<Type>? _parent;
