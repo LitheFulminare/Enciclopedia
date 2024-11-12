@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 public enum PageType
 {
     Card = 0,
-    Monster = 1
+    Monster = 1,
+    Category = 2
 }
 
 namespace Enciclopedia
@@ -15,7 +16,7 @@ namespace Enciclopedia
     internal class TreeNode<Type>
     {
         public Type value;
-        public PageType pageType;
+        public PageType pageType = PageType.Category;
 
         private int _access = 0;
 
@@ -58,6 +59,7 @@ namespace Enciclopedia
             }
             return null;
         }
+
 
         public void ProcessPreOrder(Action<TreeNode<Type>> function)
         {

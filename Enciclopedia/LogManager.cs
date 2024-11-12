@@ -8,11 +8,11 @@ namespace Enciclopedia
 {
     internal class LogManager
     {
-        private static string? _mostAccessedMonster;
-        private static string? _mostAccessedCard;
+        private static TreeNode<string>? _mostAccessedMonster;
+        private static TreeNode<string>? _mostAccessedCard;
 
-        public string? MostAccessedMonster => _mostAccessedMonster;
-        public string? MostAccessedCard => _mostAccessedCard;
+        public static TreeNode<string>? MostAccessedMonster => _mostAccessedMonster;
+        public static TreeNode<string>? MostAccessedCard => _mostAccessedCard;
 
         /* 
         -> do AVA:
@@ -21,7 +21,7 @@ namespace Enciclopedia
         - Se o caracter é 'b', significa que o usuário voltou para a categoria anterior, pai da página em que está.
         */
 
-        public static void ComputeData(List<string> accessLog, TreeNode<string> homeNode)
+        public static void ComputeLog(List<string> accessLog, TreeNode<string> homeNode)
         {
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
@@ -75,6 +75,44 @@ namespace Enciclopedia
                     currentPage = childPage;
                     currentPage.AddAccess();
                 }
+            }
+        }
+
+        public static void SetMostAccessedMonster(TreeNode<string> node)
+        {
+            if (node.pageType != PageType.Monster)
+            {
+                return;
+            }
+
+            if (_mostAccessedMonster == null)
+            {
+                _mostAccessedMonster = node;
+                return;
+            }
+
+            if (node.Access > _mostAccessedMonster.Access)
+            {
+                _mostAccessedMonster = node;
+            }
+        }
+
+        public static void SetMostAccessedCard(TreeNode<string> node)
+        {
+            if (node.pageType != PageType.Card)
+            {
+                return;
+            }
+
+            if (_mostAccessedCard == null)
+            {
+                _mostAccessedCard = node;
+                return;
+            }
+
+            if (node.Access > _mostAccessedCard.Access)
+            {
+                _mostAccessedCard = node;
             }
         }
     }
