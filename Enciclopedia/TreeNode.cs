@@ -15,7 +15,7 @@ namespace Enciclopedia
 {
     internal class TreeNode<Type>
     {
-        public Type value;
+        public Type pageName;
         public PageType pageType = PageType.Category;
 
         private int _access = 0;
@@ -28,7 +28,7 @@ namespace Enciclopedia
 
         public TreeNode(Type value, TreeNode<Type>? parent = null)
         {
-            this.value = value;
+            this.pageName = value;
             _parent = parent;
         }
 

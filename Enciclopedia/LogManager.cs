@@ -11,6 +11,8 @@ namespace Enciclopedia
         private static TreeNode<string>? _mostAccessedMonster;
         private static TreeNode<string>? _mostAccessedCard;
 
+        public static bool isDebug = false;
+
         public static TreeNode<string>? MostAccessedMonster => _mostAccessedMonster;
         public static TreeNode<string>? MostAccessedCard => _mostAccessedCard;
 
@@ -26,7 +28,7 @@ namespace Enciclopedia
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
             {
-                Console.WriteLine($"Checando o log {accessLog[i]}");
+                if (isDebug) Console.WriteLine($"Checando o log {accessLog[i]}");
 
                 // o log sempre começa na home
                 TreeNode<string> previousCategory = homeNode;
@@ -35,7 +37,7 @@ namespace Enciclopedia
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
                 {
-                    Console.WriteLine($"Checando o char {accessLog[i][j]}");
+                    if (isDebug) Console.WriteLine($"Checando o char {accessLog[i][j]}");
 
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
@@ -43,7 +45,7 @@ namespace Enciclopedia
                         previousCategory = currentPage.Parent;
                         currentPage = previousCategory;
                         currentPage.AddAccess();
-                        Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.value}");
+                        if (isDebug) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.pageName}");
                         continue;
                     }
 
@@ -54,7 +56,7 @@ namespace Enciclopedia
 
                     if (childPage == null)
                     {
-                        Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
+                        if (isDebug) Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
                         continue;
                     }
                     
@@ -70,7 +72,7 @@ namespace Enciclopedia
                         }          
                     }
 
-                    Console.WriteLine($"-> Usuario accesou a pag {childPage.value}");
+                    if (isDebug) Console.WriteLine($"-> Usuario accesou a pag {childPage.pageName}");
 
                     currentPage = childPage;
                     currentPage.AddAccess();

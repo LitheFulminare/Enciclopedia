@@ -34,11 +34,11 @@ namespace Enciclopedia
                         TreeNode<string> newPage = subcategory.AddChild(page);
 
                         // .Parent.Parent acessa a categoria que é pai da subcagoria
-                        if (newPage.Parent.Parent.value == ".Monsters")
+                        if (newPage.Parent.Parent.pageName == ".Monsters")
                         {
                             newPage.pageType = PageType.Monster;
                         }
-                        else if (newPage.Parent.Parent.value == ".Cards")
+                        else if (newPage.Parent.Parent.pageName == ".Cards")
                         {
                             newPage.pageType = PageType.Card;
                         }
