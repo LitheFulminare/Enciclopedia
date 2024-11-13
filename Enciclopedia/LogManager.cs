@@ -53,7 +53,7 @@ namespace Enciclopedia
                         continue;
                     }
 
-                    int childIndex = Convert.ToInt32(new string(accessLog[i][j], 1));
+                    int childIndex = int.Parse(accessLog[i][j].ToString());
 
                     // childPage é a pagina que vai ser acessada
                     TreeNode<string> childPage = currentPage.GetChild(childIndex);
