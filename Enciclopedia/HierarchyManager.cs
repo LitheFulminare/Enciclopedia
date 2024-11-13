@@ -9,8 +9,10 @@ namespace Enciclopedia
 {
     internal class HierarchyManager
     {
-        public static TreeNode<string> CreateHierarchyFromList(List<string> pageList)
+        public static TreeNode<string> CreateHierarchyFromList(List<string?>? pageList)
         {
+            if (pageList == null) return new TreeNode<string>("");
+
             TreeNode<string> homeNode = new TreeNode<string>("Home");
 
             // usado no foreach pra adicionar categorias e subcategorias
@@ -34,11 +36,11 @@ namespace Enciclopedia
                         TreeNode<string> newPage = subcategory.AddChild(page);
 
                         // .Parent.Parent acessa a categoria que é pai da subcagoria
-                        if (newPage.Parent.Parent.pageName == ".Monsters")
+                        if (newPage.Parent?.Parent?.pageName == ".Monsters")
                         {
                             newPage.pageType = PageType.Monster;
                         }
-                        else if (newPage.Parent.Parent.pageName == ".Cards")
+                        else if (newPage.Parent?.Parent?.pageName == ".Cards")
                         {
                             newPage.pageType = PageType.Card;
                         }

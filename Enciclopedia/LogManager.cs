@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,13 @@ namespace Enciclopedia
 {
     internal class LogManager
     {
-        private static TreeNode<string>? _mostAccessedMonster;
-        private static TreeNode<string>? _mostAccessedCard;
+        private static TreeNode<string?>? _mostAccessedMonster;
+        private static TreeNode<string?>? _mostAccessedCard;
 
         public static bool isDebugEnabled = false;
 
-        public static TreeNode<string>? MostAccessedMonster => _mostAccessedMonster;
-        public static TreeNode<string>? MostAccessedCard => _mostAccessedCard;
+        public static TreeNode<string?>? MostAccessedMonster => _mostAccessedMonster;
+        public static TreeNode<string?>? MostAccessedCard => _mostAccessedCard;
 
         /* 
         -> do AVA:
@@ -24,7 +25,7 @@ namespace Enciclopedia
         */
 
         // lê o log, pega as paginas acessadas e registra esses acessos
-        public static void RegisterLog(List<string> accessLog, TreeNode<string> homeNode)
+        public static void RegisterLog(List<string> accessLog, TreeNode<string?> homeNode)
         {
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
@@ -32,8 +33,8 @@ namespace Enciclopedia
                 if (isDebugEnabled) Console.WriteLine($"\nRegistrando o log {accessLog[i]}");
 
                 // o log sempre começa na home
-                TreeNode<string> previousCategory = homeNode;
-                TreeNode<string> currentPage = homeNode;
+                TreeNode<string?>? previousCategory = homeNode;
+                TreeNode<string?>? currentPage = homeNode;
 
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
@@ -43,11 +44,11 @@ namespace Enciclopedia
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
                     {
-                        previousCategory = currentPage.Parent;
+                        previousCategory = currentPage?.Parent;
                         currentPage = previousCategory;
-                        currentPage.AddAccess();
+                        currentPage?.AddAccess();
 
-                        if (isDebugEnabled) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.pageName}");
+                        if (isDebugEnabled) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage?.pageName}");
 
                         continue;
                     }
@@ -55,7 +56,7 @@ namespace Enciclopedia
                     int childIndex = Convert.ToInt32(new string(accessLog[i][j], 1));
 
                     // childPage é a pagina que vai ser acessada
-                    TreeNode<string> childPage = currentPage.GetChild(childIndex);
+                    TreeNode<string?>? childPage = currentPage?.GetChild(childIndex);
 
                     if (childPage == null)
                     {
@@ -83,7 +84,7 @@ namespace Enciclopedia
             }
         }
 
-        public static void SetMostAccessedPage(TreeNode<string> node)
+        public static void SetMostAccessedPages(TreeNode<string?>? node)
         {
             if (node == null) return;
 
@@ -99,7 +100,7 @@ namespace Enciclopedia
             }
         }
 
-        private static void SetMostAccessedCard(TreeNode<string> node)
+        private static void SetMostAccessedCard(TreeNode<string?> node)
         {
             if (_mostAccessedCard == null)
             {
@@ -113,7 +114,7 @@ namespace Enciclopedia
             }
         }
 
-        private static void SetMostAccessedMonster(TreeNode<string> node)
+        private static void SetMostAccessedMonster(TreeNode<string?> node)
         {
             if (_mostAccessedMonster == null)
             {

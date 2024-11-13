@@ -6,25 +6,26 @@ string logPath = "data/log.txt";
 List<string> wikiList = FileReader.CreateList(wikiPath);
 List<string> logList = FileReader.CreateList(logPath);
 
+// cria a arvore a partir da lista
 TreeNode<string> homeNode = HierarchyManager.CreateHierarchyFromList(wikiList);
 
-// determina se printa a leitura do log para fazer debug
+// faz o usuario escolher se quer printar a leitura do log para fazer debug
 LogManager.isDebugEnabled = GetUserInput();
 
 // calcula o acesso das paginas baseado no log
 LogManager.RegisterLog(logList, homeNode);
 
-homeNode.ProcessPreOrder(LogManager.SetMostAccessedPage);
+homeNode.ProcessPreOrder(LogManager.SetMostAccessedPages);
 
-Console.WriteLine($"\nCarta mais acessada: {LogManager.MostAccessedCard.pageName} com {LogManager.MostAccessedCard.Access} acessos");
-Console.WriteLine($"Monstro mais acessado: {LogManager.MostAccessedMonster.pageName} com {LogManager.MostAccessedMonster.Access} acessos.");
+Console.WriteLine($"\nCarta mais acessada: {LogManager.MostAccessedCard?.pageName} com {LogManager.MostAccessedCard?.Access} acessos");
+Console.WriteLine($"Monstro mais acessado: {LogManager.MostAccessedMonster?.pageName} com {LogManager.MostAccessedMonster?.Access} acessos");
 
 // lê input e para decidir se printa linhas de debug ou nao
 bool GetUserInput()
 {
     while (true)
     {
-        Console.WriteLine("Pritar linhas de debug da leitura do log?");
+        Console.WriteLine("Deseja printar todas as linhas da leitura do log de acessos?");
         Console.WriteLine("1 - Sim");
         Console.WriteLine("2 - Não\n");
         string? userInputStr = Console.ReadLine();
