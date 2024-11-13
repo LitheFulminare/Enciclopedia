@@ -33,8 +33,7 @@ namespace Enciclopedia
                 if (isDebugEnabled) Console.WriteLine($"\nRegistrando o log {accessLog[i]}");
 
                 // o log sempre começa na home
-                TreeNode<string> previousCategory = homeNode;
-                TreeNode<string> currentPage = homeNode;
+                TreeNode<string>? currentPage = homeNode;
 
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
@@ -44,11 +43,9 @@ namespace Enciclopedia
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
                     {
-                        previousCategory = currentPage.Parent;
-                        currentPage = previousCategory;
-                        currentPage?.AddAccess();
+                        currentPage = currentPage?.Parent;
 
-                        if (isDebugEnabled) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.pageName}");
+                        if (isDebugEnabled) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage?.pageName}");
 
                         continue;
                     }
@@ -56,25 +53,12 @@ namespace Enciclopedia
                     int childIndex = int.Parse(accessLog[i][j].ToString());
 
                     // childPage é a pagina que vai ser acessada
-                    TreeNode<string> childPage = currentPage.GetChild(childIndex);
+                    TreeNode<string>? childPage = currentPage?.GetChild(childIndex);
 
                     if (childPage == null)
                     {
                         if (isDebugEnabled) Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
                         continue;
-                    }
-                    
-                    // checa de a página é uma categoria ou subcategoria
-                    if (childPage.GetChild(0) != null)
-                    {
-                        if (childPage.Parent == homeNode)
-                        {
-                            previousCategory = homeNode;
-                        }
-                        else
-                        {
-                            previousCategory = currentPage;
-                        }          
                     }
 
                     if (isDebugEnabled) Console.WriteLine($"-> Usuario accesou a pag {childPage.pageName}");

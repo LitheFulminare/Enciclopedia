@@ -9,7 +9,7 @@ namespace Enciclopedia
 {
     internal class HierarchyManager
     {
-        public static TreeNode<string> CreateHierarchyFromList(List<string?>? pageList)
+        public static TreeNode<string> CreateHierarchyFromList(List<string> pageList)
         {
             if (pageList == null) return new TreeNode<string>("");
 
