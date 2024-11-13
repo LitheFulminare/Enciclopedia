@@ -64,6 +64,7 @@ namespace Enciclopedia
                         continue;
                     }
                     
+                    // checa de a página é uma categoria ou subcategoria
                     if (childPage.GetChild(0) != null)
                     {
                         if (childPage.Parent == homeNode)

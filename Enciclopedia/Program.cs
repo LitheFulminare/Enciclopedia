@@ -15,6 +15,7 @@ LogManager.isDebugEnabled = GetUserInput();
 // calcula o acesso das paginas baseado no log
 LogManager.RegisterLog(logList, homeNode);
 
+// pega nó por nó e pega os q tiveram mais acessos
 homeNode.ProcessPreOrder(LogManager.SetMostAccessedPages);
 
 Console.WriteLine($"\nCarta mais acessada: {LogManager.MostAccessedCard?.pageName} com {LogManager.MostAccessedCard?.Access} acessos");
