@@ -11,7 +11,7 @@ namespace Enciclopedia
         private static TreeNode<string>? _mostAccessedMonster;
         private static TreeNode<string>? _mostAccessedCard;
 
-        public static bool isDebug = false;
+        public static bool isDebugEnabled = false;
 
         public static TreeNode<string>? MostAccessedMonster => _mostAccessedMonster;
         public static TreeNode<string>? MostAccessedCard => _mostAccessedCard;
@@ -23,12 +23,13 @@ namespace Enciclopedia
         - Se o caracter é 'b', significa que o usuário voltou para a categoria anterior, pai da página em que está.
         */
 
-        public static void ComputeLog(List<string> accessLog, TreeNode<string> homeNode)
+        // lê o log, pega as paginas acessadas e registra esses acessos
+        public static void RegisterLog(List<string> accessLog, TreeNode<string> homeNode)
         {
             // loop para cada linha na lista de log
             for (int i = 0; i < accessLog.Count; i++)
             {
-                if (isDebug) Console.WriteLine($"Checando o log {accessLog[i]}");
+                if (isDebugEnabled) Console.WriteLine($"\nRegistrando o log {accessLog[i]}");
 
                 // o log sempre começa na home
                 TreeNode<string> previousCategory = homeNode;
@@ -37,7 +38,7 @@ namespace Enciclopedia
                 // loop para cada caractere de um log em particular
                 for (int j = 0; j < accessLog[i].Length; j++)
                 {
-                    if (isDebug) Console.WriteLine($"Checando o char {accessLog[i][j]}");
+                    if (isDebugEnabled) Console.WriteLine($"Lendo o char {accessLog[i][j]}");
 
                     // 'b' siginifica que ele voltou para a pagina anterior
                     if (accessLog[i][j] == 'b')
@@ -45,7 +46,9 @@ namespace Enciclopedia
                         previousCategory = currentPage.Parent;
                         currentPage = previousCategory;
                         currentPage.AddAccess();
-                        if (isDebug) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.pageName}");
+
+                        if (isDebugEnabled) Console.WriteLine($"-> Usuário voltou para a pagina {currentPage.pageName}");
+
                         continue;
                     }
 
@@ -56,7 +59,7 @@ namespace Enciclopedia
 
                     if (childPage == null)
                     {
-                        if (isDebug) Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
+                        if (isDebugEnabled) Console.WriteLine($"Tentativa de acessar a página de índice {childIndex} falhou");
                         continue;
                     }
                     
@@ -72,7 +75,7 @@ namespace Enciclopedia
                         }          
                     }
 
-                    if (isDebug) Console.WriteLine($"-> Usuario accesou a pag {childPage.pageName}");
+                    if (isDebugEnabled) Console.WriteLine($"-> Usuario accesou a pag {childPage.pageName}");
 
                     currentPage = childPage;
                     currentPage.AddAccess();
@@ -80,32 +83,24 @@ namespace Enciclopedia
             }
         }
 
-        public static void SetMostAccessedMonster(TreeNode<string> node)
+        public static void SetMostAccessedPage(TreeNode<string> node)
         {
-            if (node.pageType != PageType.Monster)
+            if (node == null) return;
+
+            if (node.pageType == PageType.Card)
             {
+                SetMostAccessedCard(node);
                 return;
             }
 
-            if (_mostAccessedMonster == null)
+            if (node.pageType == PageType.Monster)
             {
-                _mostAccessedMonster = node;
-                return;
-            }
-
-            if (node.Access > _mostAccessedMonster.Access)
-            {
-                _mostAccessedMonster = node;
+                SetMostAccessedMonster(node);
             }
         }
 
-        public static void SetMostAccessedCard(TreeNode<string> node)
+        private static void SetMostAccessedCard(TreeNode<string> node)
         {
-            if (node.pageType != PageType.Card)
-            {
-                return;
-            }
-
             if (_mostAccessedCard == null)
             {
                 _mostAccessedCard = node;
@@ -115,6 +110,20 @@ namespace Enciclopedia
             if (node.Access > _mostAccessedCard.Access)
             {
                 _mostAccessedCard = node;
+            }
+        }
+
+        private static void SetMostAccessedMonster(TreeNode<string> node)
+        {
+            if (_mostAccessedMonster == null)
+            {
+                _mostAccessedMonster = node;
+                return;
+            }
+
+            if (node.Access > _mostAccessedMonster.Access)
+            {
+                _mostAccessedMonster = node;
             }
         }
     }
